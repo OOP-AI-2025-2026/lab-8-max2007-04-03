@@ -1,6 +1,6 @@
 package ua.opnu;
 
-public class Main {
+public class TupleDemo {
     public static void main(String[] args) {
 
         GenericTwoTuple<String, Integer> person = new GenericTwoTuple<>("Alice", 25);

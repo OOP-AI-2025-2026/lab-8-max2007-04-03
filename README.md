@@ -13,7 +13,7 @@
 У Java є клас `java.util.Optional<T>`, який використовується для безпечної роботи з можливою відсутністю значення
 (наприклад, користувач може не мати по-батькові; API-виклик може повернути null замість даних і т.д.).
 
-Ваше завдання — створити спрощену версію такого класу: `MyOptional<T>`.
+Ваше завдання — створити спрощену версію такого класу: `ua.opnu.MyOptional<T>`.
 
 Цей клас:
 
@@ -42,7 +42,7 @@ User user = repository.findUser("admin"); // може повернути або 
 
 Ідея `Optional<T>` — зробити відсутність значення явною і керованою.
 
-Замість того, щоб повертати або `User`, або `null`, ми повертаємо `Optional<User>` (або наш `MyOptional<User>`). Це означає буквально:
+Замість того, щоб повертати або `User`, або `null`, ми повертаємо `Optional<User>` (або наш `ua.opnu.MyOptional<User>`). Це означає буквально:
 - "Ось контейнер, у ньому АБО є `User`, АБО немає `User`. Ти мусиш це обробити."
 
 Таким чином немає "магічного `null`", який трошки сховався і потім вибухнув.
@@ -50,7 +50,7 @@ User user = repository.findUser("admin"); // може повернути або 
 Приклад:
 
 ```java
-MyOptional<User> maybeUser = authService.findUserByLogin("admin");
+ua.opnu.MyOptional<User> maybeUser = authService.findUserByLogin("admin");
 
 if (maybeUser.isPresent()) {
     // ок, користувач є
@@ -120,21 +120,21 @@ Optional<Integer> tryParseInt(String text)
 
 ```java
 User findUserByLogin(String login)           // може повернути null
-MyOptional<User> findUserByLogin(String login) // завжди повертає об’єкт, але той об’єкт може бути "порожнім"
+ua.opnu.MyOptional<User> findUserByLogin(String login) // завжди повертає об’єкт, але той об’єкт може бути "порожнім"
 ```
 
 Друга сигнатура чесніша. Вона не бреше.
 
 #### Завдання
 
-Реалізуйте свій клас `MyOptional<T>` (узагальнений клас) зі створенням об’єктів через конструктори.
+Реалізуйте свій клас `ua.opnu.MyOptional<T>` (узагальнений клас) зі створенням об’єктів через конструктори.
 
-Вимоги до класу `MyOptional<T>`
+Вимоги до класу `ua.opnu.MyOptional<T>`
 
 Створіть клас:
 
 ```java
-public class MyOptional<T> {
+public class ua.opnu.MyOptional<T> {
     // поля, конструктори, методи - див. нижче
 }
 ```
@@ -147,7 +147,7 @@ public class MyOptional<T> {
 2. Конструктор без параметрів (порожній):
 
 ```java
-public MyOptional() {
+public ua.opnu.MyOptional() {
     // створює "порожній" об'єкт
 }
 ```
@@ -157,7 +157,7 @@ public MyOptional() {
 3. Конструктор з параметром:
 
 ```java
-public MyOptional(T value) {
+public ua.opnu.MyOptional(T value) {
     // створює об'єкт зі значенням
 }
 ```
@@ -166,9 +166,9 @@ public MyOptional(T value) {
 
 - зберегти `value` у поле;
 - встановити `present = true;`;
-- якщо `value == null`, потрібно кинути IllegalAr`gumentException з повідомленням типу "MyOptional не приймає null".
+- якщо `value == null`, потрібно кинути IllegalAr`gumentException з повідомленням типу "ua.opnu.MyOptional не приймає null".
 
-Пояснення: ми не дозволяємо створити `MyOptional`, який начебто "має значення", але значення насправді `null`. Це небезпечно і незрозуміло.
+Пояснення: ми не дозволяємо створити `ua.opnu.MyOptional`, який начебто "має значення", але значення насправді `null`. Це небезпечно і незрозуміло.
 
 4. Метод `boolean isPresent()`
 
@@ -208,16 +208,16 @@ public T orElse(T defaultValue) {
 
 Приклад очікуваної поведінки:
 
-- якщо в нас є new `MyOptional<>("admin")`, то `orElse("guest")` повертає "admin";
-- якщо в нас new `MyOptional<>() (порожній)`, тоді `orElse("guest")` повертає "guest".
+- якщо в нас є new `ua.opnu.MyOptional<>("admin")`, то `orElse("guest")` повертає "admin";
+- якщо в нас new `ua.opnu.MyOptional<>() (порожній)`, тоді `orElse("guest")` повертає "guest".
 
 8. Метод `toString()`
 
 ```java
 @Override
 public String toString() {
-    // якщо значення є -> "MyOptional[value=admin]"
-    // якщо значення немає -> "MyOptional[empty]"
+    // якщо значення є -> "ua.opnu.MyOptional[value=admin]"
+    // якщо значення немає -> "ua.opnu.MyOptional[empty]"
 }
 ```
 
@@ -228,14 +228,14 @@ public class ua.opnu.Main {
     public static void main(String[] args) {
 
         // 1. Порожнє значення (наприклад, у користувача немає по-батькові)
-        MyOptional<String> middleName = new MyOptional<>();
-        System.out.println(middleName); // MyOptional[empty]
+        ua.opnu.MyOptional<String> middleName = new ua.opnu.MyOptional<>();
+        System.out.println(middleName); // ua.opnu.MyOptional[empty]
         System.out.println("isPresent: " + middleName.isPresent()); // false
         System.out.println("orElse: " + middleName.orElse("немає")); // "немає"
 
         // 2. Заповнене значення (наприклад, логін користувача)
-        MyOptional<String> username = new MyOptional<>("admin");
-        System.out.println(username); // MyOptional[value=admin]
+        ua.opnu.MyOptional<String> username = new ua.opnu.MyOptional<>("admin");
+        System.out.println(username); // ua.opnu.MyOptional[value=admin]
         System.out.println("isPresent: " + username.isPresent()); // true
         System.out.println("get(): " + username.get()); // "admin"
         System.out.println("orElse: " + username.orElse("guest")); // "admin"
@@ -250,7 +250,7 @@ public class ua.opnu.Main {
 
         // 4. Перевіримо, що конструктор не приймає null
         try {
-            MyOptional<String> broken = new MyOptional<>(null);
+            ua.opnu.MyOptional<String> broken = new ua.opnu.MyOptional<>(null);
             System.out.println("unexpected: " + broken);
         } catch (IllegalArgumentException ex) {
             System.out.println("Правильно не дозволив null: " + ex.getMessage());
@@ -262,10 +262,10 @@ public class ua.opnu.Main {
 
 ### Завдання 2
 
-Дан клас `BookData`, який моделює інформацію про книгу в інтернет-магазині. Поле `reviews` зберігає загальну кількість оцінок користувачів, а `total` зберігає загальну суму оцінок. Рейтинг книги вираховується як `total / reviews`.
+Дан клас `ua.opnu.BookData`, який моделює інформацію про книгу в інтернет-магазині. Поле `reviews` зберігає загальну кількість оцінок користувачів, а `total` зберігає загальну суму оцінок. Рейтинг книги вираховується як `total / reviews`.
 
 ```java
-class BookData {
+class ua.opnu.BookData {
 
     private String title;
     private String author;
@@ -287,15 +287,15 @@ public class ua.opnu.Main {
         Printer myPrinter = new Printer();
         Integer[] intArray = {1, 2, 3};
         String[] stringArray = {"Hello", "World"};
-        myPrinter.printArray(intArray);
-        myPrinter.printArray(stringArray);
+        myPrinter.ua.opnu.printArray(intArray);
+        myPrinter.ua.opnu.printArray(stringArray);
     }
 }
 
 class Printer {}
 ```
 
-Згідно коду, є масив цілих чисел та масив рядків. Напишіть в класі `Printer` узагальнений метод `printArray()`, який може роздруковувати всі елементи як масиву цілих чисел, так і масиву рядків (дивіться код методу `main()`).
+Згідно коду, є масив цілих чисел та масив рядків. Напишіть в класі `Printer` узагальнений метод `ua.opnu.printArray()`, який може роздруковувати всі елементи як масиву цілих чисел, так і масиву рядків (дивіться код методу `main()`).
 
 Якщо задача вирішена вірно, код в методі `main()` повинен працювати коректно та роздруковувати елементи масивів. **Код методу `main()` змінювати не можна!**
 
@@ -432,6 +432,6 @@ class ObjectTwoTuple {
 
 Ваше завдання полягає в наступному - вирішити цю проблему за допомогою механізму узагальненого програмування.
 
-1. Напишіть узагальнену версію класу `ConcreteTwoTuple` під назвою `GenericTwoTuple`, в якій поле `first` буде мати тип `T`, а поле `second` - тип `V`.
-2. Створіть клас під назвою `GenericThreeTuple` та використовуючи механізм композиції, використайте функціонал класу `GenericTwoTuple` та додайте ще одне поле поле `three` типу `S`.
-3. Продемонструйте роботу класу `GenericTwoTuple` та `GenericThreeTuple` на прикладах, які ви придумаєте самостійно.
+1. Напишіть узагальнену версію класу `ConcreteTwoTuple` під назвою `ua.opnu.GenericTwoTuple`, в якій поле `first` буде мати тип `T`, а поле `second` - тип `V`.
+2. Створіть клас під назвою `ua.opnu.GenericThreeTuple` та використовуючи механізм композиції, використайте функціонал класу `ua.opnu.GenericTwoTuple` та додайте ще одне поле поле `three` типу `S`.
+3. Продемонструйте роботу класу `ua.opnu.GenericTwoTuple` та `ua.opnu.GenericThreeTuple` на прикладах, які ви придумаєте самостійно.
